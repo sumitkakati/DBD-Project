@@ -1,0 +1,30 @@
+.container{
+    display:flex;
+    flex-direction:row;
+}
+.categories{
+    height:100%;
+    width:20vw;
+    border-right:2px black solid;
+    background-color:#3f51b5;
+}
+.buttonRed{
+    background-color:#e42f28;
+    padding:25px;
+    height:auto;
+    width:auto;
+    border-bottom:1px #fff solid;
+    text-align:center;
+    color:#fff;
+    cursor:pointer;
+}
+.buttonPurple{
+    background-color:#4A4E69;
+    padding:25px;
+    height:auto;
+    width:auto;
+    border-bottom:1px #fff solid;
+    text-align:center;
+    color:#fff;
+    cursor:pointer;
+}
