@@ -27,7 +27,7 @@ SILVER PINK: #C9ADA7
 .form-wrapper {
   display: flex;
   flex-direction: column;
-  width: 280px;
+  width: 350px;
   max-width: 80%;
   min-width: 100px;
   min-height: 400px;
@@ -129,20 +129,20 @@ input.error {
 }
 
 .submit {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  width: 100% !important;
+  display: flex!important;
+  flex-wrap: wrap!important;
 }
 .fullName{
-    display:flex;
-    flex-direction: row;
-    justify-content: left;
+    display:flex!important;
+    flex-direction: row!important;
+    justify-content: left!important;
 }
 .divider{
-    margin-left: auto;
-    margin-right: auto;
-    padding:5% 0% 3% 0%
+    margin-left: auto!important;
+    margin-right: auto!important;
+    padding:5% 0% 3% 0% !important;
 }
 *{
-    /* overflow: hidden; */
+    box-sizing:content-box !important;
 }

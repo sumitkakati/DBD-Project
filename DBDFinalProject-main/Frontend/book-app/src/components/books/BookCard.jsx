@@ -11,14 +11,16 @@ import {FunctionsContext} from '../context/FunctionsProvider';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 400,
+    width:250,
+    height:300,
+    positon:'absolute'
   },
   media: {
     height: 140,
   },
   author:{
     top:'auto'
-  }
+  },
 });
 
 const BookCard = (props) =>{
@@ -30,7 +32,11 @@ const BookCard = (props) =>{
       id,author,name,cover
   }
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} onClick = {() => {
+      console.log("book clicked is ",name);
+      setBookId(book)
+      if(!books) setBooks(true);
+    }}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -51,14 +57,6 @@ const BookCard = (props) =>{
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick = {() => {
-          console.log("book clicked is ",name);
-          setBookId(book)
-          if(!books) setBooks(true);
-        }
-          }>
-          Open
-        </Button>
       </CardActions>
     </Card>
   );

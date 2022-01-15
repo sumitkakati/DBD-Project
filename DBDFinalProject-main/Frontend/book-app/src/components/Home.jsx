@@ -18,7 +18,7 @@ const Home = () => {
                 }
                 <NavBar/>
             </div>
-            <div style={{paddingTop:'50px'}}>
+            <div style={{paddingTop:'40px'}}>
             {account ? books ? Object.keys(bookId).length !== 0 ? <SingleBook /> : <Books/> : <MyLists/> : null}
             </div>
         </div>

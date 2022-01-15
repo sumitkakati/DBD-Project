@@ -161,10 +161,12 @@ export default class SignupForm extends Component {
                 <span className="error">{errors.password}</span>
               )}
             </div>
-            <div className="submit">
-              <button>Create</button>
+            <div style={{display:'flex',flexDirection:'column'}}>
+              <div className="submitButton" style={{width:'310px'}}>
+                <button>Create</button>
+              </div>
+              <div className="divider">OR</div>
             </div>
-            <div className="divider">OR</div>
             <GoogleLogin
               clientId={clientId}
               isSignedIn={false}

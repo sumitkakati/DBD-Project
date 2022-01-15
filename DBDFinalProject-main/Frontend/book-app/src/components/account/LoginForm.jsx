@@ -88,8 +88,10 @@ const LoginForm = () =>{
 
         };
     return (
-      <div className="wrapper" style={{height:'auto',overflow:'hidden'}}>
-        <div className="form-wrapper">
+      <div className="WrapperClass" style={{
+        height:'auto',overflow:'hidden',
+        }}>
+        <div className="form-WrapperClass">
           <h2>Login To Account</h2>
           <form onSubmit={handleSubmit} noValidate>
             <div className="email">
@@ -105,19 +107,19 @@ const LoginForm = () =>{
               )}
             </div>
             <div className="password">
-              <label htmlFor="password">Password</label><br/>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 name="password"
                 onChange={handleChange}
-                style={{width:'100%'}}
+                style={{width:'103%',marginBottom:'0'}}
                 // noValidate
               />
               {errors.password.length > 0 && (
                 <span className="error">{errors.password}</span>
               )}
             </div>
-            <div className="submit">
+            <div className="submitButton" style={{width:'300px'}}>
               <button>Submit</button>
             </div>
             <div className="divider">OR</div>

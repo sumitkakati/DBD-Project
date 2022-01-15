@@ -1,9 +1,9 @@
 p, div {
     font-family: Lato;
   }
-  .wrapper {
+  .WrapperClass {
     height: 97vh;
-    width: 350px;
+    width: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,10 +11,10 @@ p, div {
     background-color: #4A4E69;
   }
   
-  .form-wrapper {
+  .form-WrapperClass {
     display: flex;
     flex-direction: column;
-    width: 280px;
+    width: 350px;
     max-width: 80%;
     min-width: 100px;
     min-height: 300px;
@@ -24,7 +24,7 @@ p, div {
     background-color: #fefefe;
   }
   
-  .form-wrapper > h2 {
+  .form-WrapperClass > h2 {
     display: flex;
     justify-content: center;
     font-family: "Segoe UI", "Ubuntu", "Roboto", "Open Sans", "Helvetica Neue", sans-serif;
@@ -102,7 +102,11 @@ p, div {
   }
   
   .submit {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
+    width: 100%!important;
+    display: flex!important;
+    flex-wrap: wrap!important;
+    padding:0 !important;
+  }
+  *{
+    box-sizing:content-box!important;
   }

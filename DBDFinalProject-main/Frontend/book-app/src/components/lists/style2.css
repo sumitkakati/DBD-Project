@@ -5,8 +5,10 @@
 .categories{
     height:100%;
     width:20vw;
-    border-right:2px black solid;
-    background-color:#3f51b5;
+}
+.categoriesList{
+    height:100%;
+    width:200vw;
 }
 .buttonRed{
     background-color:#e42f28;

@@ -13,7 +13,7 @@ const useStyles = makeStyles({
         '& > *': {
             paddingLeft: '30px',
             height: '350px',
-            
+
         }
     }
 })
@@ -24,7 +24,7 @@ const MyLists = () => {
     const { bookList2, setBookList2 } = useContext(FunctionsContext);
 
     const classes = useStyles();
-
+    const [page,setPage] = useState(0);
     const handleClick = async (e) => {
         const id = e.target.id;
         const lob = {};
@@ -62,24 +62,37 @@ const MyLists = () => {
             .catch(err => console.log(err));
     }
     return (
-        <div className="container" >
-            <div className="categories">
-                <div id='0' className={colors[0] == 0 ? 'buttonPurple' : 'buttonRed'} onClick={handleClick}> Recommendations</div>
-                <div id='1' className={colors[1] == 0 ? 'buttonPurple' : 'buttonRed'} onClick={handleClick} >Wish To Read</div>
-                <div id='2' className={colors[2] == 0 ? 'buttonPurple' : 'buttonRed'} onClick={handleClick} >Currently Reading</div>
-                <div id='3' className={colors[3] == 0 ? 'buttonPurple' : 'buttonRed'} onClick={handleClick} >Finished Reading</div>
-                <div id='4' className={colors[4] == 0 ? 'buttonPurple' : 'buttonRed'} onClick={handleClick} >Wish To Re-Read</div>
+        <div className="container" style={{display:'flex',flexDirection:'column',width:'100%'}}>
+            <div className="categoriesLists" style={{paddingTop:'20px',display:'flex',flexDirection:'row',marginLeft:'30px'}}>
+                <div id='0' className={colors[0] == 0 ? 'buttonPurple' : 'buttonRed'} style={{borderRight:'1px white solid'}} onClick={handleClick}> Recommendations</div>
+                <div id='1' className={colors[1] == 0 ? 'buttonPurple' : 'buttonRed'} style={{borderRight:'1px white solid'}} onClick={handleClick} >Wish To Read</div>
+                <div id='2' className={colors[2] == 0 ? 'buttonPurple' : 'buttonRed'} style={{borderRight:'1px white solid'}} onClick={handleClick} >Currently Reading</div>
+                <div id='3' className={colors[3] == 0 ? 'buttonPurple' : 'buttonRed'} style={{borderRight:'1px white solid'}} onClick={handleClick} >Finished Reading</div>
+                <div id='4' className={colors[4] == 0 ? 'buttonPurple' : 'buttonRed'} style={{borderRight:'1px white solid'}} onClick={handleClick} >Wish To Re-Read</div>
             </div>
-            <div className="display-side">
-                <Box className={classes.CardRow}>
-                    {
-                        Object.entries(bookList2).map((book) => (
-                            <div>
-                                <BookCard id={book[0]} name={book[1]['bookName']} author={book[1]['authorName']} cover={book[1]['cover']} avg_rating={book[1]['avg_rating']} />
-                            </div>
-                        ))
-                    }
-                </Box>
+            <div className="display-side" style={{paddingTop:'40px'}}>
+            <div>
+            <Box className ={classes.CardRow}>
+                            {
+                                Object.entries(bookList2).slice(page*10,Math.min(page*10 + 5,Object.keys(bookList2).length)).map((book) =>(
+                                <div>
+                                <BookCard id={book[0]} name={book[1]['bookName']} author={book[1]['authorName']} cover ={book[1]['cover']} avg_rating = {book[1]['avg_rating']}/>
+                                </div>
+                                ))
+                            }     
+            </Box>
+            </div>
+            <div>
+            <Box className ={classes.CardRow}>
+                            {
+                                Object.entries(bookList2).slice(page*10 + 5,Math.min((page+1)*10,Object.keys(bookList2).length)).map((book) =>(
+                                <div>
+                                <BookCard id={book[0]} name={book[1]['bookName']} author={book[1]['authorName']} cover ={book[1]['cover']} avg_rating = {book[1]['avg_rating']}/>
+                                </div>
+                                ))
+                            }     
+            </Box>
+            </div>
             </div>
         </div>
     )

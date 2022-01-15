@@ -6,7 +6,7 @@ import axios from 'axios';
 import './style4.css';
 const Search = () => {
     
-    const {setSearchBooks,searchBooks,setBookList} = useContext(FunctionsContext);
+    const {setSearchBooks,searchBooks,setBookList,setPage} = useContext(FunctionsContext);
 
     const [checkedState, setCheckedState] = useState(
         new Array(categories.length).fill(0)
@@ -79,6 +79,7 @@ const Search = () => {
     }
     const handleSearch = (e) =>{
         e.preventDefault();
+        setPage(0);
         setSearchBooks({
             "bookName": bookName,
             "authorName":authorName,

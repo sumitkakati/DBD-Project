@@ -117,7 +117,7 @@ const ProfileBox = () => {
     }
     console.log(account);
     return (
-      <div className="wrapper" style={{overflow:'hidden'}}>
+      <div className="WrapperClass" style={{height:'auto',overflow:'hidden'}}>
         <div className = "form" style={{width:'90%'}} noValidate>
             <div className="firstName">
               <label htmlFor="firstName" style={{color:'#fff',paddingRight:'10px'}}>First Name</label>

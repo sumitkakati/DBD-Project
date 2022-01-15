@@ -21,7 +21,7 @@ const Books = () => {
     const classes = useStyles();
     const no = Object.keys(bookList).length/6;
     return (
-        <div style={{overflow:'none'}}>
+        <div style={{overflow:'none',backgroundColor:'#d4e4f1'}}>
             <div style={{textAlign:'center',fontSize:'25px',padding:'10px 0px 20px 0px'}}>Search Your Books Here</div>
             {
                 <div className="container">

@@ -39,7 +39,7 @@ router.post('/',(req,res) =>{
     if(req.body.bookName != '' && req.body.bookName!=null){
         sql_for_bookName = `CREATE OR REPLACE VIEW temp AS SELECT * FROM Author INNER JOIN Book_WrittenBy_Author WHERE Author.author_id = Book_WrittenBy_Author.Author_author_id;
         CREATE OR REPLACE VIEW temp2 AS SELECT book_id, book_name, author_id, author_name, thumbnail, AverageRating FROM Book INNER JOIN temp WHERE Book.book_id = temp.Book_book_id;
-        SELECT * FROM temp2 WHERE book_name = '${req.body.bookName}';`
+        SELECT * FROM temp2 WHERE book_name LIKE '%${req.body.bookName}%';`
         console.log(req.body);
         connection.query(sql_for_bookName,(err,result2)=>{
             if(err){console.log(err)}
@@ -54,7 +54,7 @@ router.post('/',(req,res) =>{
     // author name with not null value
     if(req.body.authorName != '' && req.body.authorName!=null){
         console.log(req.body);
-        sql_for_authorName=`CREATE OR REPLACE VIEW temp AS SELECT * FROM Author INNER JOIN Book_WrittenBy_Author WHERE Author.author_id = Book_WrittenBy_Author.Author_author_id; CREATE OR REPLACE VIEW temp2 AS SELECT book_id, book_name, author_id, author_name, thumbnail, AverageRating FROM Book INNER JOIN temp WHERE Book.book_id = temp.Book_book_id; SELECT * FROM temp2 WHERE author_name = '${req.body.authorName}'`;
+        sql_for_authorName=`CREATE OR REPLACE VIEW temp AS SELECT * FROM Author INNER JOIN Book_WrittenBy_Author WHERE Author.author_id = Book_WrittenBy_Author.Author_author_id; CREATE OR REPLACE VIEW temp2 AS SELECT book_id, book_name, author_id, author_name, thumbnail, AverageRating FROM Book INNER JOIN temp WHERE Book.book_id = temp.Book_book_id; SELECT * FROM temp2 WHERE author_name LIKE '%${req.body.authorName}%'`;
         connection.query(sql_for_authorName,(err,result3)=>{
             if(err){console.log(err)}
             else{

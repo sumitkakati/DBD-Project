@@ -20,10 +20,12 @@ import { Box } from '@material-ui/core'
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
-import $ from 'jquery';
-import Popper from 'popper.js';
+// import $ from 'jquery';
+// import Popper from 'popper.js';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
+
+import ReactStars from 'react-stars'
 // this is should be got from database. In code this will be set when open button is pressed (BookCard.jsx)
 // currently on pressing i am setting setBookId(book) 
 // instead i need to do setBookId(information from database including ratings)
@@ -62,7 +64,7 @@ const SingleBook = () => {
                     for (let i = 0; i < res.data.length - 1; i++) {
                         revs.push({
                             ...res.data[i],
-                            "revImg": boxImageConvert(res.data[i]['rating_value'])
+                            "revImg": (res.data[i]['rating_value'])
                         })
                         console.log(revs);
                     }
@@ -130,14 +132,22 @@ const SingleBook = () => {
             .catch(err => console.log(err));
     }, [status])
 
+    const ratingChanged = (newRating) => {
+        console.log("new rating : ",newRating);
+        setRating(newRating);
+    };
+
+    console.log("book id : ",bookId['id']);
+
+
     return (
-        <div>
+        <div style={{backgroundColor:'#d4e4f1'}}>
             <div style={{ display: 'flex', flexDirection: 'row', paddingBottom: '2em' }}>
-                <img src={bookId['cover']} alt="cover" />
+                <img src={bookId['cover']} alt="cover" style={{marginLeft:'1em',marginTop:'1em',width:'180px',height:'280px'}}/>
                 <div>
-                    <p style={{ fontSize: '3em', fontWeight: '500', margin: 0, paddingLeft: '1em' }}>{bookId['name']}</p>
+                    <p style={{ fontSize: '3em', fontWeight: '500', margin: 0, paddingLeft: '1em'}}>{bookId['name']}</p>
                     <p style={{ fontSize: '1.5em', fontWeight: '200', paddingLeft: '2em' }}>By {bookId['author']}</p>
-                    <p>{description}</p>
+                    <p style={{paddingLeft:'2em',fontSize:'20px'}}>{description}</p>
                 </div>
             </div>
             <DropdownButton
@@ -145,14 +155,14 @@ const SingleBook = () => {
                 title={status}
                 id="dropdown-menu-align-right"
                 onSelect={handleSelect}
-                style={{ width: '10px', paddingBottom: '2em' }}
+                style={{ marginLeft:'3em',width: '10px', paddingBottom: '2em' }}
             >
                 <Dropdown.Item eventKey="Wish To Read">Wish To Read</Dropdown.Item>
                 <Dropdown.Item eventKey="Currently reading">Currently reading</Dropdown.Item>
                 <Dropdown.Item eventKey="Finished reading">Finished reading</Dropdown.Item>
                 <Dropdown.Item eventKey="Wish to re-read">Wish to re-read</Dropdown.Item>
             </DropdownButton>
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center' }}>
+            {/* <div style={{ marginLeft:'1em',display: 'flex', flexDirection: 'row', justifyContent: 'left', alignItems: 'center' }}>
                 <label htmlFor="rating" style={{ paddingRight: '10px' }}>Rating</label>
                 <input
                     name="rating"
@@ -164,34 +174,51 @@ const SingleBook = () => {
                 />
                 <span>
                     <img src={num} alt="rating" style={{ height: '37px', width: '90px', paddingLeft: '1em' }} /> </span>
+            </div> */}
+            <div style={{display:'flex',flexDirection:'row',alignItems:'center'}}>
+                <div style={{marginLeft:'1em',paddingRight:'1em',fontSize:'22px',fontWeight:'bold'}}>Rate this Book!</div>
+                <ReactStars
+                    count={5}
+                    onChange={ratingChanged}
+                    size={40}
+                    color2={'#ffd700'}
+                    half={true} 
+                    value={rating}
+                    style={{marginLeft:'1em'}}
+                />
             </div>
-            <div style={{ paddingTop: '30px' }}>
-                <label htmlFor="rating" >Add Review</label></div>
+            <div style={{ marginLeft:'1em',paddingTop: '30px' }}>
+                <label htmlFor="rating" style={{fontSize:'28px',fontWeight:'bold'}}>Add Review</label>
+            </div>
             <div>
                 <div>
-                    <textarea id="w3review" name="w3review" rows="4" cols="50" onChange={(e) => { e.preventDefault(); setReview(e.target.value) }}>
+                    <textarea id="w3review" name="w3review" rows="8" cols="100" style={{marginLeft:'1em'}}onChange={(e) => { e.preventDefault(); setReview(e.target.value) }}>
                     </textarea>
                     <button onClick={handleSubmit} style={{ margin: '20px 0px' }}> submit</button>
                 </div>
                 <Box>
-                    <b>REVIEWS</b>
+                    <b style={{fontSize:'28px'}}>REVIEWS</b>
                     {
                         ratingsBox.map((r, index) => {
                             return (
                                 <>
-                                    <div style={{ display: 'flex', flexDirection: 'row', padding: '20px' }}>
-                                        <div>
+                                    <div style={{ display: 'flex', flexDirection: 'row', padding: '10px' }}>
+                                        <div style={{position:'relative'}}>
                                             <img src={r['user_image']} alt="profilePic" style={{ width: '30px' }} />
                                             <div><span>{r['f_name']}</span> <span>{r['l_name']}</span></div>
                                         </div>
-                                        <div style={{ marginLeft: '70px' }}>
-                                            <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '40px', textAlign: 'left', justifyContent: 'center' }}>
-                                                <div>{r['rating_value']}</div>
-                                                <div>
-                                                    <img src={r["revImg"]} alt="rating" style={{ width: '70px', height: '27px' }} />
-                                                </div>
+                                        <div style={{ position:'absolute',left: '200px' }}>
+                                            <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '40px', textAlign: 'left' }}>
+                                            <ReactStars
+                                                count={5}
+                                                size={40}
+                                                color2={'#ffd700'}
+                                                half={true} 
+                                                value={r["revImg"]}
+                                                edit={false}
+                                             />
                                             </div>
-                                            <div>{r['ReviewComment']}</div>
+                                            <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '40px', textAlign: 'left'}}>{r['ReviewComment']}</div>
                                         </div>
                                     </div>
                                     <hr />
