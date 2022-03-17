@@ -17,7 +17,7 @@ router.use(cors());
 */
 router.post('/',(req,res) =>{    
     console.log("from signup ",req.body);
-    const sql = `Insert into mydb11.user (f_name,l_name,e_mail,user_image,password) values ('${req.body.firstName}','${req.body.lastName}','${req.body.email}','${req.body.image}','${req.body.password}')`;
+    const sql = `Insert into rec_db.user (f_name,l_name,e_mail,user_image,password) values ('${req.body.firstName}','${req.body.lastName}','${req.body.email}','${req.body.image}','${req.body.password}')`;
     connection.query(sql,(err,result)=>{
         if(err){
             res.send("User Already exists");

@@ -18,7 +18,7 @@ router.use(cors());
     OUTPUT : Message saying successfully login and redirect to user page + usertable
 */
 router.post('/',(req,res) =>{
-    const sql = `SELECT * FROM mydb11.user WHERE e_mail='${req.body.email}'`;
+    const sql = `SELECT * FROM rec_db.user WHERE e_mail='${req.body.email}'`;
     console.log(req.body);
     connection.query(sql,(err,result)=>{
         console.log(result[0],req.body.password);

@@ -7,7 +7,7 @@ import './style3.css';
 const ProfileBox = () => {
 
     const {account,setAccount,setProfile,setOpenLogin,setOpenSignup} = useContext(AccountContext);
-    const {setBooks,setPage,setBookId,setSearchBooks} = useContext(FunctionsContext);
+    const {setBooks,setPage,setBookId,setSearchBooks,setBookList2} = useContext(FunctionsContext);
 
     const [edit,setEdit] = useState(false);
 
@@ -114,6 +114,7 @@ const ProfileBox = () => {
       setBooks(true);
       setOpenSignup(false);
       setOpenLogin(false);
+      setBookList2([]);
     }
     console.log(account);
     return (

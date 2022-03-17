@@ -48,6 +48,7 @@ const MyLists = () => {
         await axios.post('http://localhost:3002/status', details)
             .then((res) => {
                 if (res.data.length === 0) alert("No books match your search !!!");
+                console.log(res.data);
                 for (let i = 0; i < res.data[0].length; i++) {
                     lob[res.data[0][i]['book_id']] = {
                         "authorName": res.data[0][i]['author_name'],
@@ -56,9 +57,8 @@ const MyLists = () => {
                         "avg_rating": res.data[0][i]['AverageRating']
                     }
                 }
-                console.log(res.data);
                 setBookList2(lob);
-            })
+        })
             .catch(err => console.log(err));
     }
     return (
@@ -71,31 +71,33 @@ const MyLists = () => {
                 <div id='4' className={colors[4] == 0 ? 'buttonPurple' : 'buttonRed'} style={{borderRight:'1px white solid'}} onClick={handleClick} >Wish To Re-Read</div>
             </div>
             <div className="display-side" style={{paddingTop:'40px'}}>
-            <div>
-            <Box className ={classes.CardRow}>
-                            {
-                                Object.entries(bookList2).slice(page*10,Math.min(page*10 + 5,Object.keys(bookList2).length)).map((book) =>(
-                                <div>
-                                <BookCard id={book[0]} name={book[1]['bookName']} author={book[1]['authorName']} cover ={book[1]['cover']} avg_rating = {book[1]['avg_rating']}/>
-                                </div>
-                                ))
-                            }     
-            </Box>
-            </div>
-            <div>
-            <Box className ={classes.CardRow}>
-                            {
-                                Object.entries(bookList2).slice(page*10 + 5,Math.min((page+1)*10,Object.keys(bookList2).length)).map((book) =>(
-                                <div>
-                                <BookCard id={book[0]} name={book[1]['bookName']} author={book[1]['authorName']} cover ={book[1]['cover']} avg_rating = {book[1]['avg_rating']}/>
-                                </div>
-                                ))
-                            }     
-            </Box>
-            </div>
+                <div>
+                    <Box className ={classes.CardRow}>
+                                    {
+                                        Object.entries(bookList2).slice(page*10,Math.min(page*10 + 5,Object.keys(bookList2).length)).map((book) =>(
+                                        <div>
+                                        <BookCard id={book[0]} name={book[1]['bookName']} author={book[1]['authorName']} cover ={book[1]['cover']} avg_rating = {book[1]['avg_rating']}/>
+                                        </div>
+                                        ))
+                                    }     
+                    </Box>
+                </div>
+                <div>
+                    <Box className ={classes.CardRow}>
+                                    {
+                                        Object.entries(bookList2).slice(page*10 + 5,Math.min((page+1)*10,Object.keys(bookList2).length)).map((book) =>(
+                                        <div>
+                                        <BookCard id={book[0]} name={book[1]['bookName']} author={book[1]['authorName']} cover ={book[1]['cover']} avg_rating = {book[1]['avg_rating']}/>
+                                        </div>
+                                        ))
+                                    }     
+                    </Box>
+                </div>
             </div>
         </div>
     )
 }
 
 export default MyLists
+
+// IMPORTANT !!!! When clicking recommendations, do not click the book cards , app will crash

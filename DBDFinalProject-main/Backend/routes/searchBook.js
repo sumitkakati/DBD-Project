@@ -71,10 +71,10 @@ router.post('/',(req,res) =>{
         console.log(req.body);
         for(let i=0;i<req.body.categories.length;i++){
             if(i==0){
-                query=query+`genre_name = '${req.body.categories[i]}'`;
+                query=query+`genre_name LIKE '%${req.body.categories[i]}%'`;
             }
             else{
-                query=query+`OR genre_name = '${req.body.categories[i]}'`;
+                query=query+`OR genre_name LIKE '%${req.body.categories[i]}%'`;
             }
         }
         console.log(query)
