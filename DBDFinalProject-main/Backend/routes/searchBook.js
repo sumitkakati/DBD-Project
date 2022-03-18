@@ -54,12 +54,19 @@ router.post('/',(req,res) =>{
     // author name with not null value
     if(req.body.authorName != '' && req.body.authorName!=null){
         console.log(req.body);
-        sql_for_authorName=`CREATE OR REPLACE VIEW temp AS SELECT * FROM Author INNER JOIN Book_WrittenBy_Author WHERE Author.author_id = Book_WrittenBy_Author.Author_author_id; CREATE OR REPLACE VIEW temp2 AS SELECT book_id, book_name, author_id, author_name, thumbnail, AverageRating FROM Book INNER JOIN temp WHERE Book.book_id = temp.Book_book_id; SELECT * FROM temp2 WHERE author_name LIKE '%${req.body.authorName}%'`;
+        //sql_for_authorName=`CREATE OR REPLACE VIEW temp AS SELECT * FROM Author INNER JOIN Book_WrittenBy_Author WHERE Author.author_id = Book_WrittenBy_Author.Author_author_id; CREATE OR REPLACE VIEW temp2 AS SELECT book_id, book_name, author_id, author_name, thumbnail, AverageRating FROM Book INNER JOIN temp WHERE Book.book_id = temp.Book_book_id; SELECT * FROM temp2 WHERE author_name LIKE '%${req.body.authorName}%'`;
+        sql_for_authorName = `Select b.book_id, b.book_name, b.thumbnail, b.AverageRating, a1.author_id, a1.author_name from author a1, book_writtenby_author a2, book b where a1.author_id = a2.author_author_id and a2.book_book_id = b.book_id and a1.author_name Like '%${req.body.authorName}%';`
         connection.query(sql_for_authorName,(err,result3)=>{
             if(err){console.log(err)}
             else{
-                console.log("result"+result3[2]);
-                res.send(result3[2]);
+                // console.log("Hello\n");
+                // Object.keys(result3).forEach(key =>
+                //     {
+                //         console.log(key,result3[key]);
+                //     }
+                // ) 
+                console.log("result = "+result3);
+                res.send(result3);
             }
         })
         return;

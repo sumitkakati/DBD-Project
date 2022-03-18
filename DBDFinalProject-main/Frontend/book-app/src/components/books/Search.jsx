@@ -27,6 +27,16 @@ const Search = () => {
     },[])
 
     useEffect(() =>{
+        for(let i=0;i<categories.length;i++)
+        {
+            if(searchBooks['categories'] != null && searchBooks['categories'].includes(categories[i]))
+                checkedState[i] = 1;
+            else
+                checkedState[i] = 0;
+        }
+    },[searchBooks['categories']])
+
+    useEffect(() =>{
         const getBooks = async (searchBooks) =>{
                 console.log("filter parameters : \n" + searchBooks);
                 await axios.post('http://localhost:3002/searchBook',searchBooks)
@@ -52,13 +62,19 @@ const Search = () => {
 
     const handleChange = (e) =>{
 
+        // e.preventDefault();
+        // const {name,value} = e.target;
+        // switch(name){
+        //     case "bookName":setBookName(value);break;
+        //     case "authorName":setAuthorName(value);break;
+        //     default:break;
+        // }
         e.preventDefault();
         const {name,value} = e.target;
-        switch(name){
-            case "bookName":setBookName(value);break;
-            case "authorName":setAuthorName(value);break;
-            default:break;
-        }
+        setSearchBooks({
+            ...searchBooks,
+            [name] : value,
+        });
     }
 
     const handleOnClick = (idx) =>{
@@ -105,12 +121,13 @@ const Search = () => {
                     categories.map((key, index) => {
                         return (
                             <div className="categories-list-item" style={{paddingBottom:'10px'}}>
-                                <input
+                                <input 
                                 type="checkbox"
                                 id={`checkbox-${index}`}
                                 name={key}
+                                //defaultValue = {searchBooks['categories']}
                                 value={key}
-                                checked={checkedState[index]}
+                                checked={(checkedState[index])} /*|| (searchBooks['categories'] != null && searchBooks['categories'].includes(key))) ? true : false}*/
                                 onClick={() =>handleOnClick(index)}
                                 />
                                 <label htmlFor={`custom-checkbox-${index}`}>{key}</label>

@@ -18,6 +18,7 @@ var bookDetailsRoutes = require('./routes/bookDetails');
 var ratingRoutes = require('./routes/rating');
 var fetchByStatusRoutes = require('./routes/fetchByStatus');
 var updateStatusRoutes = require('./routes/updateStatus');
+var getStatus = require('./routes/getStatus');
 
 app.use('/login',loginRoutes);
 app.use('/signup',signupRoutes);
@@ -27,6 +28,7 @@ app.use('/bookDetails',bookDetailsRoutes);
 app.use('/rating',ratingRoutes);
 app.use('/status',fetchByStatusRoutes);
 app.use('/updatestatus',updateStatusRoutes);
+app.use('/getStatus',getStatus);
 
 app.listen(3002,() =>{
     console.log("Server started on port 3002");

@@ -15,6 +15,21 @@ router.use(cors());
     PROCESS : Querry the database and output all details of the book with given book id
     OUTPUT : ALL book details object {f_name,l_name,user_image,bookrating,bookReview}
 */
+// router.post('/status',(req,res)=>{
+//     sql_query=`SELECT user_id FROM user WHERE e_mail='${req.body.e_mail}'`;
+//         connection.query(sql_query,(err,result5)=>{
+//             console.log(result5);
+//             x=result5[0]['user_id'];
+//             sql_query2 = `Select status from book_readingstatus_user where book_book_id = '${req.body.bookId}' and user_user_id = ${x}`;
+//             connection.query(sql_query2, (err,result6) => {
+//                 console.log("result6 = ", result6);
+//                 res.send(result6);
+//             });
+//         });
+
+// });
+
+
 
 router.post('/', (req, res) => {
     const bookId = req.body.bookId;

@@ -71,6 +71,11 @@ const SingleBook = () => {
                     setDescription(res.data[res.data.length - 1]["description"]);
                     setRatingsBox(revs);
                 })
+                await axios.post('http://localhost:3002/getStatus', { 'bookId': bookId['id'], 'e_mail' : account.e_mail})
+                .then((res) => {
+                    console.log(res.data);
+                    setStatus(res.data);
+                })    
         }
         getRatings();
     }, [])
@@ -114,7 +119,8 @@ const SingleBook = () => {
 
     const handleSelect = (e) => {
         console.log(e);
-        if (e !== status) setStatus(e)
+        if(e !== status)
+            setStatus(e)
     }
 
     useEffect(async () => {
@@ -127,7 +133,7 @@ const SingleBook = () => {
         await axios.post('http://localhost:3002/updatestatus', details)
             .then((res) => {
                 if (res === '') alert("status change not possible!");
-                else alert("status change successfull");
+                //else alert("status change successfull");
             })
             .catch(err => console.log(err));
     }, [status])
