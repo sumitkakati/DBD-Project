@@ -23,7 +23,9 @@
     margin-left: 1em;
 }
 .entireTableInSearch{
-    background-color: #EDEDED;
+    background-color: #c7e8fd;
+    /*margin-top:1.3em;
+    */
 }
 .textBoxOfBookSearch{
     margin:0px;

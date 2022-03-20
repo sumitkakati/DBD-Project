@@ -25,7 +25,7 @@ const Books = () => {
             <div style={{textAlign:'center',fontSize:'25px',padding:'10px 0px 20px 0px'}}>Search Your Books Here</div>
             {
                 <div className="container">
-                <div style={{width:'25vw',border:'2px solid #4A4E69',height:'100%'}}>
+                <div style={{width:'25vw',border:'2px solid #4A4E69',height:'100%',marginTop:"1.3em",}}>
                     <Search/>
                 </div>
                 <div className="displayBooks" style={{left:'auto'}}>

@@ -9,7 +9,7 @@ const Profile = () => {
         open={profile}
         onClose={() =>{setProfile(false)}}
       >
-      <img src = {account.image} alt="profile" style={{width:'350px',cursor:'pointer',height:'355px',overflow:'hidden'}}/>  
+      <img src = {account.image} alt="profile" style={{width:'100%',cursor:'pointer',height:'355px',overflow:'hidden'}}/>  
       <ProfileBox/>
       </Dialog>
     )

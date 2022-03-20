@@ -12,15 +12,24 @@ import {FunctionsContext} from '../context/FunctionsProvider';
 const useStyles = makeStyles({
   root: {
     width:250,
-    height:300,
+    height:350,
     positon:'absolute'
   },
   media: {
-    height: 140,
+    height: 200,
   },
   author:{
-    top:'auto'
+    top:'auto',
+    fontSize:'1.1em',
+    //textSizeAdjust:'60%',
   },
+  bookCardStyle:{
+    fontSize:'1.1em',
+    //textSizeAdjust:'60%',
+  },
+  cardContent:{
+    margin:'auto',
+  }
 });
 
 const BookCard = (props) =>{
@@ -43,21 +52,19 @@ const BookCard = (props) =>{
           image={cover}
           title={cover}
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+        <CardContent className={classes.cardContent} >
+          <Typography gutterBottom variant="h5" component="h2" className={classes.bookCardStyle}>
             {name}
-          </Typography>
+          </Typography >
           <div style={{display:'flex',flexDirection:'row'}}>
               <Typography variant="body2" color="textSecondary" component="p" className={classes.author}>
                 Author : {author}
               </Typography>
           </div>
-          <Typography>Avg. Rating : {avg_rating !== null ? avg_rating : "N/A"} 
+          <Typography className={classes.bookCardStyle}>Avg. Rating : {avg_rating !== null ? avg_rating.toFixed(2) : "N/A"} 
               </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-      </CardActions>
     </Card>
   );
 }

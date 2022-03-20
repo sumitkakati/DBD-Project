@@ -21,7 +21,7 @@ const NavBar = () => {
             }
         },
         appbar:{
-            color:'#fff'
+            color:'#fff',
         },
         signup:{
             color:`${signup.color}`,

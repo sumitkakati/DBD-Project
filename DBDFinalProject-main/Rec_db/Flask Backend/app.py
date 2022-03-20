@@ -6,6 +6,7 @@ import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+
 app = Flask(__name__)
 app.run(debug=True)
 """
@@ -31,10 +32,13 @@ def updateDetails():
     print('request from express received')
     data = request.get_json()
     #books = pd.read_csv('../books2.csv')
-    sql = "SELECT user_id FROM User WHERE e_mail = '" + data['email'] + "'"
-    mycursor.execute(sql)
-    u = mycursor.fetchall()
-    user_id = u[0][0]
+    #sql = "SELECT user_id FROM User WHERE e_mail = '" + data['email'] + "';"
+    #print(sql)
+    #mycursor.execute(sql)
+    #u = mycursor.fetchall()
+    #print(u)
+    b = data['b']
+    print(b)
     # for i in range(97):
     #     book_id = str(int(books.iloc[i]['book_id']))
     #     sql_for_average="SELECT book_id, AverageRating FROM Book WHERE book_id = '" + book_id + "'"
@@ -68,7 +72,7 @@ def updateDetails():
     #     w2.append((int(tup[0]), tup[1], tup[2]))
     # df3 = pd.DataFrame(w2, columns=['book_id', 'user_id', 'rating'])
     # df3.to_csv('../ratings3.csv', index = False)
-    l = f(user_id)
+    l = f(b)
     df = pd.read_csv("../books.csv")
     dict = {}
     for b in l:
@@ -84,13 +88,13 @@ def updateDetails():
 
 
 
-def f(user_id):
-    sql = "SELECT b.book_name FROM Rating r, Book b WHERE r.User_user_id = " + str(user_id) + " AND r.Book_book_id = b.book_id ORDER BY rating_value desc LIMIT 3"
-    mycursor.execute(sql)
-    q = mycursor.fetchall()
-    b = []
-    for tup in q:
-        b.append(tup[0])
+def f(b):
+    #sql = "SELECT b.book_name FROM Rating r, Book b WHERE r.User_user_id = " + str(user_id) + " AND r.Book_book_id = b.book_id ORDER BY rating_value desc LIMIT 3"
+    #mycursor.execute(sql)
+    #q = mycursor.fetchall()
+    #b = []
+    #for tup in q:
+    #    b.append(tup[0])
     
     books = pd.read_csv('../books.csv')
     ratings = pd.read_csv('../ratings.csv')

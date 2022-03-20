@@ -20,37 +20,56 @@ router.use(cors());
 router.post('/',async (req,res) =>{
     console.log(req.body);   
     if(req.body.bookStatus == 'Recommendations'){
-            const data = {
-                email: req.body.e_mail,
-                books : []
-            } 
-            var options = { 
-                method: 'POST', 
-                uri: 'http://127.0.0.1:5000/', 
-                body: data, 
-                json: true // Automatically stringifies the body to JSON 
-            }; 
-            await request(options) 
-                .then(function (parsedBody) { 
-                    console.log(parsedBody['books'])
-                    l=[]
-                    x = '0'
-                    for (const [key, value] of Object.entries(parsedBody['books'])) {
-                        obj = {}
-                        obj["book_id"] = x;
-                        x += 1;
-                        obj["book_name"] = key
-                        obj["thumbnail"] = value[1]
-                        obj["author_name"] = value[0]
-                        obj["AverageRating"] = 'N/A'
-                        l.push(obj);
-                    }
-                    console.log(l);
-                    res.send([l]);
-                }) 
-                .catch(function (err) { 
-                    console.log(err); 
-                }); 
+        sql_query=`SELECT user_id FROM user WHERE e_mail='${req.body.e_mail}'`;
+        connection.query(sql_query, async (err,result5)=>{
+            console.log(result5);
+            x=result5[0]['user_id'];
+            console.log(x);
+            sql_query2 = `SELECT b.book_name FROM Rating r, Book b WHERE r.User_user_id = ${x} AND r.Book_book_id = b.book_id ORDER BY rating_value desc LIMIT 3;`
+            console.log(sql_query2)
+            connection.query(sql_query2, async (err,result6)=>{
+                console.log("Top 3 books: ", result6);
+                let b = [];
+                for(let i=0;i<Object.keys(result6).length;i++)
+                {
+                    b.push(result6[i]['book_name'])
+                }
+                console.log("Top 3 books: ", b);   
+                const data = {
+                    b,
+                    books : []
+                } 
+                var options = { 
+                    method: 'POST', 
+                    uri: 'http://127.0.0.1:5000/', 
+                    body: data, 
+                    json: true // Automatically stringifies the body to JSON 
+                }; 
+                await request(options) 
+                    .then(function (parsedBody) { 
+                        console.log(parsedBody['books'])
+                        l=[]
+                        x = '0'
+                        for (const [key, value] of Object.entries(parsedBody['books'])) {
+                            obj = {}
+                            obj["book_id"] = x;
+                            x += 1;
+                            obj["book_name"] = key
+                            obj["thumbnail"] = value[1]
+                            obj["author_name"] = value[0]
+                            obj["AverageRating"] = 'N/A'
+                            l.push(obj);
+                        }
+                        console.log(l);
+                        res.send([l]);
+                    }) 
+                    .catch(function (err) { 
+                        console.log(err); 
+                    });
+            })
+            })
+              
+             
     }
     else{
         sql_query=`SELECT user_id FROM user WHERE e_mail='${req.body.e_mail}'`;

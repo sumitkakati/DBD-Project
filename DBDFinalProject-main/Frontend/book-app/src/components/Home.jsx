@@ -76,13 +76,23 @@ const Home = () => {
 
     return (
         <div >
-            <div>
+            
+            <div style={{position:"relative"}}>
                 {
                 account? null :
-                <img style ={{width:"100vw",height:'100vh',overflow:'hidden'}}src="https://compote.slate.com/images/a92fef3e-c1db-4cbf-93da-dae90c0b9388.jpeg?width=1200&rect=4395x2930&offset=0x0" alt="HOME PAGE" />
+                    <div>
+                        <img style ={{width:"100vw",height:'100vh',overflow:'hidden'}}src="https://compote.slate.com/images/a92fef3e-c1db-4cbf-93da-dae90c0b9388.jpeg?width=1200&rect=4395x2930&offset=0x0" alt="HOME PAGE" />
+                        <div style={{backgroundColor:"#c7e8fd",border:"1px solid black",opacity:"0.8",position:"absolute",width:"100%",height:"300px",top:"230px"}}></div>
+                        <div style={{position:"absolute",top:"280px",left:"375px",textAlign:"center"}}>
+                            <h1 style={{fontSize:"72px"}}>Best Reads </h1>
+                            <p style={{fontSize:"50px"}}>Book Rating and Recommendation website</p>
+                        </div>
+                    </div>
                 }
+                
                 <NavBar/>
             </div>
+            
             <div style={{paddingTop:'40px'}}>
             {account ? books ? Object.keys(bookId).length !== 0 ? <SingleBook /> : <Books/> : <MyLists/> : null}
             </div>
